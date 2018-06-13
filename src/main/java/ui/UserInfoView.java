@@ -1,5 +1,6 @@
 package ui;
 
+import backend.BotConfiguration;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -23,9 +24,9 @@ public class UserInfoView extends HBox {
     private VBox passwordView = new VBox(passwordLabel, passwordField);
 
     public UserInfoView() {
-        this.setSpacing(10);
-        emailField.setMinWidth(200);
-        passwordField.setMinWidth(200);
+        this.setSpacing(BotConfiguration.SPACEING);
+        emailField.setMinWidth(BotConfiguration.INFO_TEXT_FIELD_WIDTH);
+        passwordField.setMinWidth(BotConfiguration.INFO_TEXT_FIELD_WIDTH);
 
         this.getChildren().add(emailView);
         this.getChildren().add(passwordView);

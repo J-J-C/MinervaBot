@@ -38,6 +38,7 @@ public class MinervaBot extends Application {
 
         Scene mainBoard = new Scene(root, 500, 400);
         primaryStage.setScene(mainBoard);
+        primaryStage.setTitle("McGill Course Registration Bot");
         primaryStage.show();
     }
 }

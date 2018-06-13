@@ -1,10 +1,6 @@
 package ui;
 
-import java.lang.module.Configuration;
-import java.util.Arrays;
-
 import backend.BotConfiguration;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

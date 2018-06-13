@@ -12,17 +12,16 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.List;
 
+import backend.BotConfiguration;
+
 public class CrnView extends VBox {
-
-
 
     private Label crnLabel = new Label("CRN:");
     private List<TextField> crnFieldList = new ArrayList<>();
     private Button saveButton = new Button("Add");
 
-
     public CrnView() {
-        this.setSpacing(10);
+        this.setSpacing(BotConfiguration.SPACEING);
         this.getChildren().add(crnLabel);
         for(int i = 0; i < 8; i++) {
             crnFieldList.add(new TextField());

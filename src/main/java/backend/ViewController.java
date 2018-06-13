@@ -32,7 +32,6 @@ public class ViewController {
 	 public void updateUserInfo(String email, String password) {
 		 BotConfiguration.setEmail(email);
 		 BotConfiguration.setPassword(password);
-		 System.out.println("called" + BotConfiguration.getEmail() + BotConfiguration.getPassword());
 		 submissionView.updateView();
 	 }
 	 

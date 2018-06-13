@@ -14,6 +14,9 @@ public class BotConfiguration {
     
     // UI Configuration
     public static final int MARGIN_OUTER = 10;
+    public static final int SPACEING = 10;
+    public static final int INFO_TEXT_FIELD_WIDTH = 200;
+
     
     // User defined variable
     private static String McGill_Email = "";
