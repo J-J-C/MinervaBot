@@ -1,3 +1,4 @@
+package app;
 import backend.BotConfiguration;
 import backend.ViewController;
 import javafx.application.Application;
@@ -14,8 +15,13 @@ public class MinervaBot extends Application {
 
     // abstract the variable for future development
     static {
-        System.setProperty("webdriver.chrome.driver", "resources/chromedriver-win.exe");
-//        System.setProperty("webdriver.chrome.driver", "chromedriver");
+    	
+    	String OS = System.getProperty("os.name").toLowerCase();
+    	if (OS.indexOf("win") >= 0) {
+            System.setProperty("webdriver.chrome.driver", "chromedriver-win.exe");
+		} else {
+            System.setProperty("webdriver.chrome.driver", "chromedriver-mac");
+		}
     }
 
     public static void main(String[] args) {

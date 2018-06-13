@@ -36,6 +36,7 @@ public class RegistrationWorker {
         int counter = 1;
         for(String crn: BotConfiguration.getCRNs()) {
             driver.findElement(By.id("crn_id" + counter)).sendKeys(crn);
+            counter++;
         }
 
         // submit

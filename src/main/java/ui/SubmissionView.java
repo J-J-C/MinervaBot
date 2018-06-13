@@ -62,7 +62,6 @@ public class SubmissionView extends VBox implements View {
             info.append("Missing Password. ");
             allSet = false;
         }
-        System.out.println(BotConfiguration.getCRNs().size());
         if (BotConfiguration.getCRNs().size() == 0) {
             info.append("Missing CRNs. ");
             allSet = false;

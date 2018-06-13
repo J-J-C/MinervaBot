@@ -10,8 +10,6 @@ import javafx.scene.layout.VBox;
 
 public class UserInfoView extends HBox implements View {
 
-
-
     private Label emailLabel = new Label("McGill Email");
     private Label passwordLabel = new Label("Password");
     private TextField emailField = new TextField();

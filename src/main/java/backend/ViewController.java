@@ -121,7 +121,6 @@ public class ViewController {
         @Override
         public void handle(MouseEvent event) {
             updateCrns(new ArrayList<>());
-            System.out.println("yes");
             notifyAllView();
         }
     }
