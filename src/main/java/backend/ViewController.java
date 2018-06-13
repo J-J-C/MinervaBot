@@ -31,7 +31,6 @@ public class ViewController {
         this.termView = termView;
         this.submissionView = submissionView;
 
-        userInfoView.addMoustEventListener(new UserInfoSaveEvent());
         crnView.addMoustEventListener(new CrnsSaveEvent());
         termView.addChangeListener(new TermToggleListener());
         submissionView.addRegistrationEvent(new RegisterCourseEvent());
@@ -61,13 +60,6 @@ public class ViewController {
         public void handle(MouseEvent event) {
             updateUserInfo(userInfoView.getEmail(), userInfoView.getPassword());
             updateCrns(crnView.getCrnFields());
-        }
-    }
-
-    class UserInfoSaveEvent implements EventHandler<MouseEvent> {
-        @Override
-        public void handle(MouseEvent event) {
-            updateUserInfo(userInfoView.getEmail(), userInfoView.getPassword());
         }
     }
 
@@ -130,6 +122,4 @@ public class ViewController {
             submissionView.updateView();
         }
     }
-
-
 }

@@ -15,7 +15,6 @@ public class RegistrationWorker {
     }
 
     public void startRegistration() {
-        System.out.println("start....");
         WebDriver driver = new ChromeDriver();
         // login to minerva
         driver.get(BotConfiguration.MINERVA_URL);
