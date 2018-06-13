@@ -41,10 +41,11 @@ public class MinervaBot extends Application {
         SubmissionView submissionView = new SubmissionView();
         ViewController controller = new ViewController(userInfoView, crnView, termView, submissionView);
         root.add(userInfoView, 0, 0);
-        root.add(crnView, 0, 1);
-        root.add(termView, 0, 2);
+        root.add(termView, 0, 1);
+        root.add(crnView, 0, 2);
         root.add(submissionView, 0, 3);
-        Scene mainBoard = new Scene(root, 500, 330);
+
+        Scene mainBoard = new Scene(root, 520, 330);
         primaryStage.setScene(mainBoard);
         primaryStage.setTitle("McGill Course RegistrationWorker Bot");
         primaryStage.show();

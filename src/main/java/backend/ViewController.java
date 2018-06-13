@@ -1,5 +1,7 @@
 package backend;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javafx.beans.value.ChangeListener;
@@ -8,10 +10,7 @@ import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import ui.CrnView;
-import ui.SubmissionView;
-import ui.TermView;
-import ui.UserInfoView;
+import ui.*;
 
 /**
  * A single controller which controls all view and a single bot configuration.
@@ -20,6 +19,7 @@ import ui.UserInfoView;
  */
 public class ViewController {
 
+    private List<View> viewList = new ArrayList<>();
     private UserInfoView userInfoView;
     private CrnView crnView;
     private SubmissionView submissionView;
@@ -37,12 +37,15 @@ public class ViewController {
         submissionView.addClearCrnEvent(new ClearCrnEvent());
         submissionView.addClearAllEvent(new ClearAllEvent());
 
+        viewList.add(this.userInfoView);
+        viewList.add(this.crnView);
+        viewList.add(this.termView);
+        viewList.add(this.submissionView);
     }
 
     public void updateUserInfo(String email, String password) {
         BotConfiguration.setEmail(email);
         BotConfiguration.setPassword(password);
-        submissionView.updateView();
     }
 
     public void updateCrns(List<TextField> crnFieldList) {
@@ -52,7 +55,12 @@ public class ViewController {
                 BotConfiguration.addCRN(crn.getText());
             }
         }
-        submissionView.updateView();
+    }
+
+    private void notifyAllView() {
+        for(View view: viewList) {
+            view.updateView();
+        }
     }
 
     class CrnsSaveEvent implements EventHandler<MouseEvent> {
@@ -60,6 +68,7 @@ public class ViewController {
         public void handle(MouseEvent event) {
             updateUserInfo(userInfoView.getEmail(), userInfoView.getPassword());
             updateCrns(crnView.getCrnFields());
+            notifyAllView();
         }
     }
 
@@ -73,19 +82,25 @@ public class ViewController {
             } else {
                 BotConfiguration.setTerm("201809");
             }
-            submissionView.updateView();
         }
     }
 
     class RegisterCourseEvent implements EventHandler<MouseEvent> {
+
         @Override
         public void handle(MouseEvent event) {
+            if(!BotConfiguration.infoIsComplete()) {
+                String message = "Errors in email address, password or CRNs, please verify";
+                Alert alert = new Alert(Alert.AlertType.WARNING, message, ButtonType.OK);
+                alert.showAndWait();
+                return;
+            }
             Task<Void> registrationTask = new Task<Void>() {
-                @Override
-                protected Void call() throws Exception {
-                    RegistrationWorker.getInstance().startRegistration();
-                    return null;
-                }
+               @Override
+               protected Void call() throws Exception {
+                   RegistrationWorker.getInstance().startRegistration();
+                   return null;
+               }
             };
             registrationTask.setOnSucceeded(e -> {
                 String message = "All is done! :) Please verify your registration on Minerva";
@@ -94,7 +109,7 @@ public class ViewController {
             });
             registrationTask.setOnFailed(e -> {
                 System.out.println(e.toString());
-                String message = "RegistrationWorker Failed. Please check your McGill Email and password!";
+                String message = "RegistrationWorker Failed. Please verify your McGill email, password and CRNs!";
                 Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
                 alert.showAndWait();
             });
@@ -105,21 +120,18 @@ public class ViewController {
     class ClearCrnEvent implements EventHandler<MouseEvent> {
         @Override
         public void handle(MouseEvent event) {
-            BotConfiguration.getCRNs().clear();
-            updateCrns(crnView.getCrnFields());
-            submissionView.updateView();
+            updateCrns(new ArrayList<>());
+            System.out.println("yes");
+            notifyAllView();
         }
     }
 
     class ClearAllEvent implements EventHandler<MouseEvent> {
         @Override
         public void handle(MouseEvent event) {
-            BotConfiguration.setEmail("");
-            BotConfiguration.setPassword("");
-            BotConfiguration.getCRNs().clear();
-            updateUserInfo(userInfoView.getEmail(), userInfoView.getPassword());
-            updateCrns(crnView.getCrnFields());
-            submissionView.updateView();
+            updateUserInfo("", "");
+            updateCrns(new ArrayList<>());
+            notifyAllView();
         }
     }
 }

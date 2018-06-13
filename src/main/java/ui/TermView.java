@@ -8,7 +8,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 
-public class TermView extends HBox{
+public class TermView extends HBox implements View {
 	
 	private RadioButton fallTerm = new RadioButton();
 	private RadioButton winterTerm = new RadioButton("Calendar");
@@ -17,7 +17,7 @@ public class TermView extends HBox{
 	public TermView() {
 		fallTerm.setText("Fall 2018");
 		fallTerm.setToggleGroup(group);
-		winterTerm.setText("Winter 2018");
+		winterTerm.setText("Winter 2019");
 		winterTerm.setToggleGroup(group);
 		fallTerm.setSelected(true);
 		BotConfiguration.setTerm("201809");
@@ -28,5 +28,10 @@ public class TermView extends HBox{
 	
 	public void addChangeListener(ChangeListener<Toggle> listener) {
 		group.selectedToggleProperty().addListener(listener);
+	}
+
+	@Override
+	public void updateView() {
+		// this method is empty on purpose
 	}
 }

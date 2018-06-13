@@ -14,7 +14,7 @@ import java.util.List;
 
 import backend.BotConfiguration;
 
-public class CrnView extends VBox {
+public class CrnView extends VBox implements View {
 
     private Label crnLabel = new Label("CRN:");
     private List<TextField> crnFieldList = new ArrayList<>();
@@ -41,4 +41,17 @@ public class CrnView extends VBox {
 	public void addMoustEventListener(EventHandler<MouseEvent> onClickEvent) {
 		saveButton.setOnMouseClicked(onClickEvent);
 	}
+
+    @Override
+    public void updateView() {
+        for(TextField crnField: crnFieldList) {
+            crnField.clear();
+        }
+        int counter = 0;
+        for(String crn: BotConfiguration.getCRNs()){
+            System.out.println(crn);
+            crnFieldList.get(counter).setText(crn);
+            counter++;
+        }
+    }
 }

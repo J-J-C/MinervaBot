@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 // View displays mcgill email, password, crns before final submission
-public class ConsoleView extends VBox{
+public class ConsoleView extends VBox implements View {
 
 	private Label mcgillInfoDisplay = new Label("");
 	private Label crnDisplay = new Label("");

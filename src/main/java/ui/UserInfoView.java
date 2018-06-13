@@ -1,17 +1,14 @@
 package ui;
 
 import backend.BotConfiguration;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class UserInfoView extends HBox {
+public class UserInfoView extends HBox implements View {
 
 
 
@@ -40,4 +37,10 @@ public class UserInfoView extends HBox {
 	public String getPassword() {
 		return passwordField.getText();
 	}
+
+	@Override
+    public void updateView() {
+        emailField.setText(BotConfiguration.getEmail());
+        passwordField.setText(BotConfiguration.getPassword());
+    }
 }
