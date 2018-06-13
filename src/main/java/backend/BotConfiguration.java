@@ -22,6 +22,7 @@ public class BotConfiguration {
     private static String McGill_Email = "";
     private static String McGill_Password = "";
     private static List<String> CRN_List = new ArrayList<>();
+    private static String TERM = "";
 	
     public static String getEmail() {
 		return McGill_Email;
@@ -49,6 +50,14 @@ public class BotConfiguration {
 	
 	public static boolean infoIsComplete() {
 		return McGill_Email.length() > 2 && McGill_Password.length() > 8 && CRN_List.size() > 0;
+	}
+	
+	public static void setTerm(String term) {
+		TERM = term;
+	}
+
+	public static String getTerm() {
+		return TERM;
 	}
 }
 
