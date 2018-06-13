@@ -1,6 +1,8 @@
 package ui;
 
+import backend.BotConfiguration;
 import javafx.beans.value.ChangeListener;
+import javafx.geometry.Pos;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -18,6 +20,10 @@ public class TermView extends HBox{
 		winterTerm.setText("Winter 2018");
 		winterTerm.setToggleGroup(group);
 		fallTerm.setSelected(true);
+		BotConfiguration.setTerm("201809");
+		this.setSpacing(10);
+		this.setAlignment(Pos.CENTER_LEFT);
+		this.getChildren().addAll(fallTerm, winterTerm);
 	}
 	
 	public void addChangeListener(ChangeListener<Toggle> listener) {
