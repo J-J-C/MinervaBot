@@ -5,24 +5,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class RegsitrationWorker {
+public class RegistrationWorker {
 
-	// abstract the variable for future development
-    static {
-        System.setProperty("webdriver.chrome.driver", "resources/chromedriver-win.exe");
-        System.setProperty("webdriver.chrome.driver", "chromedriver");
-    }
+    private static final RegistrationWorker INSTANCE = new RegistrationWorker();
+    private RegistrationWorker() {}
     
-    private static final RegsitrationWorker INSTANCE = new RegsitrationWorker();
-    private WebDriver driver = new ChromeDriver();
-    
-    private RegsitrationWorker() {}
-    
-    public static RegsitrationWorker getInstance() {
+    public static RegistrationWorker getInstance() {
     	return INSTANCE;
     }
-    
-    private void setup() {
+
+    public void startRegistration() {
+        System.out.println("start....");
+        WebDriver driver = new ChromeDriver();
         // login to minerva
         driver.get(BotConfiguration.MINERVA_URL);
         driver.findElement(By.id("mcg_un")).sendKeys(BotConfiguration.getEmail());
@@ -38,13 +32,14 @@ public class RegsitrationWorker {
         Select term = new Select(driver.findElement(By.id("term_id")));
         term.selectByValue(BotConfiguration.getTerm());
         driver.findElement(By.className("pagebodydiv")).findElement(By.tagName("input")).click();
-    }
 
-    private void register() {
-    	int counter = 1;
-    	for(String crn: BotConfiguration.getCRNs()) {
-    		driver.findElement(By.id("crn_id" + counter)).sendKeys(crn);
-    	}
+        // add CRNs
+        int counter = 1;
+        for(String crn: BotConfiguration.getCRNs()) {
+            driver.findElement(By.id("crn_id" + counter)).sendKeys(crn);
+        }
+
+        // submit
         driver.findElement(By.className("pagebodydiv")).findElement(By.xpath("//input[@name='REG_BTN' and @value='Submit Changes']")).click();
     }
 }
