@@ -1,4 +1,4 @@
-# MinervaBot - Course Registration Bot for McGill Student :laughing:
+# MinervaBot - Course Registration Bot for McGill Students :laughing:
 
 This is a course registration app for McGill studetns.
 
@@ -18,7 +18,7 @@ Chome: https://www.google.com/chrome/
 5. Cilck **Register** to register your courses.
 
 ### Note::warning:
-1. **Please verify your registration at Minverva**
+1. **Please verify your registration on Minverva**
 2. Make sure you have entered the correct email, password and CRNs. This application
 **DOES NOT** check these things for you. (Hopefully this will get improved in next
 release)
